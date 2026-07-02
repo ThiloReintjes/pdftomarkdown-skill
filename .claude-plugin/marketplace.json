@@ -1,0 +1,14 @@
+{
+  "name": "pdftomarkdown",
+  "owner": {
+    "name": "pdftomarkdown.dev"
+  },
+  "description": "PDF reading for Claude Code, powered by pdftomarkdown.dev",
+  "plugins": [
+    {
+      "name": "pdftomarkdown",
+      "source": "./",
+      "description": "Lets Claude read any PDF — scanned documents, tables, multi-column layouts, CJK — by converting it to markdown with npx pdftomarkdown."
+    }
+  ]
+}

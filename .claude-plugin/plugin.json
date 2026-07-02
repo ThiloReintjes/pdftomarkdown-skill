@@ -1,0 +1,11 @@
+{
+  "name": "pdftomarkdown",
+  "description": "Lets Claude read any PDF — scanned documents, tables, multi-column layouts, CJK — by converting it to markdown with npx pdftomarkdown.",
+  "version": "0.1.0",
+  "author": {
+    "name": "pdftomarkdown.dev"
+  },
+  "homepage": "https://pdftomarkdown.dev",
+  "license": "MIT",
+  "keywords": ["pdf", "markdown", "ocr", "extraction", "documents"]
+}
