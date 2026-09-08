@@ -13,7 +13,7 @@ In Claude Code:
 /plugin install pdftomarkdown@pdftomarkdown
 ```
 
-Requirements: Node 18+ (for `npx`). No API key needed to start — the free demo tier converts the first page of any PDF. For full documents, get a free API key (100 pages/month) in 30 seconds at **https://pdftomarkdown.dev/auth/github** and set:
+Requirements: Node 18+ (for `npx`). No API key needed to start — the free demo tier converts the first page of any PDF. For full documents, get a free API key (20 starter pages once) in 30 seconds at **https://pdftomarkdown.dev/auth/github** and set:
 
 ```sh
 export PDFTOMARKDOWN_API_KEY=your_key_here
