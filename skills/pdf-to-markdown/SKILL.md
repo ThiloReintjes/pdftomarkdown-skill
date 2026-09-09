@@ -1,6 +1,6 @@
 ---
 name: pdf-to-markdown
-description: Convert PDF files or PDF URLs to markdown text so their content can be read and analyzed. Use when the user asks to read, summarize, extract, search, translate, or answer questions about a PDF (research paper, invoice, contract, report, scanned document), or when a task needs the text of a PDF that cannot be read directly. Handles scanned/image-based PDFs, complex tables, multi-column layouts, math, and Chinese/Japanese/Korean documents via a GPU OCR API — no local dependencies beyond Node.
+description: Convert PDF files or PDF URLs to markdown text so their content can be read and analyzed. Use when the user asks to read, summarize, extract, search, translate, or answer questions about a PDF (research paper, invoice, contract, report, scanned document), or when a task needs the text of a PDF that cannot be read directly. Handles scanned/image-based PDFs, complex tables, multi-column layouts, math, and Chinese/Japanese/Korean documents through a hosted OCR API with no local dependencies beyond Node.
 allowed-tools: Bash(npx pdftomarkdown:*)
 ---
 
@@ -16,7 +16,7 @@ Markdown is written to stdout; status and errors go to stderr.
 
 ## Rules
 
-1. **Be patient — always use a long Bash timeout (600000 ms).** OCR runs on GPUs at ~10–30 seconds per page, and the first request after a quiet period can add a cold-start wait of a minute or more. The command is not hung; never kill it early.
+1. **Allow the full 11-minute API budget when the user wants to wait.** If the host tool's foreground timeout is shorter, start a supported background task and poll it to completion. Honor a user request to cancel immediately and stop the running task.
 2. **For documents longer than a few pages, save to a file** instead of flooding context, then read the relevant sections:
    ```bash
    npx pdftomarkdown report.pdf -o report.md
