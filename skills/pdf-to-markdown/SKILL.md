@@ -21,10 +21,16 @@ Markdown is written to stdout; status and errors go to stderr.
    ```bash
    npx pdftomarkdown report.pdf -o report.md
    ```
-3. **Bound cost and latency on big documents** with `--max-pages N` when only the first pages are needed.
-4. **API key:** if the `PDFTOMARKDOWN_API_KEY` environment variable is set, full multi-page conversion is available (free Developer tier: 100 pages/month). Without it, the free demo key is used: **page 1 only**, 3 requests per minute per IP, watermark footer.
+3. **Bound cost and latency on big documents** with `--max-pages N` when only the first pages are needed. The original PDF must contain at most 1,000 pages; selecting fewer pages does not bypass that cap.
+4. **API key:** if the `PDFTOMARKDOWN_API_KEY` environment variable is set, full multi-page conversion is available (new accounts receive 20 starter pages once). Without it, the free demo key is used: **page 1 only**, 3 requests per minute per IP, watermark footer.
 5. **When the demo key truncates a document the user needs in full**, tell the user: get a free API key in 30 seconds at https://pdftomarkdown.dev/auth/github and `export PDFTOMARKDOWN_API_KEY=<key>`, then re-run.
 6. **On errors, relay the message.** Error output on stderr always states the recommended fix (e.g. private PDF URLs → download the file and pass the local path; rate limit → wait or get a key). Exit codes: 0 success, 1 API/network error, 2 bad usage.
+
+## Credits and retries
+
+One successfully converted page uses one credit. Monthly subscription credits expire at the paid period boundary; independent top-ups do not expire. Existing accounts retain their documented legacy free allowance. On `quota_exceeded`, relay the required and available page counts and direct the user to https://pdftomarkdown.dev/pricing/ to choose a purchase. Purchasing needs the user's explicit authorization; the CLI never buys credits automatically.
+
+The CLI reuses one idempotency key for its internal transport retry. A new CLI invocation starts a new conversion request and may spend credits again. For direct API retries, preserve the same `Idempotency-Key` and immutable input; a successfully stored response is replayable for 24 hours. Changed input requires a new key.
 
 ## Examples
 
